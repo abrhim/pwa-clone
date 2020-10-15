@@ -9,11 +9,14 @@
     }
   },
   "scripts": {
+    "format": "npm run prettier -- --write",
     "lint": "eslint 'lib/**/*'",
     "lint:fix": "npm run lint -- --fix",
     "lint-staged": "lint-staged",
-    "format": "npm run prettier -- --write",
-    "prettier": "prettier \"**/*.+(ts|tsx|js|json)\""
+    "prettier": "prettier \"**/*.+(ts|tsx|js|json)\"",
+    "tessa": "tessa-npm-plugin check --errorOnNewVulnerability",
+    "tessa:update": "tessa-npm-plugin update",
+    "test": "echo \"Error: no test specified\""
   },
   "peerDependencies": {
     "@magento/peregrine": "~6.0.0",
@@ -22,6 +25,7 @@
     "react-router-dom": "~5.1.0"
   },
   "devDependencies": {
+    "@adobe/tessa-npm-plugin": "1.4.2",
     "eslint": "7.11.0",
     "eslint-config-prettier": "6.12.0",
     "eslint-plugin-react": "7.21.4",
