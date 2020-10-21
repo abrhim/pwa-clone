@@ -51,10 +51,15 @@ pipeline {
         }
 
         stage("deploy") {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'develop'
+                }
+            }
             steps {
                 sh '''
                     npx semantic-release --dry-run
-                    echo "super cool feature"
                 '''
             }
         }
