@@ -54,6 +54,7 @@ pipeline {
             steps {
                 sh '''
                     npx semantic-release --dry-run
+                    echo "super cool feature"
                 '''
             }
         }
