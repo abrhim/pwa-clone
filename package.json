@@ -61,7 +61,7 @@
     "url": "https://github.com/magento-commerce/data-services-pwa-recs.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "release": {
     "branches": [
@@ -70,9 +70,6 @@
         "name": "develop",
         "prerelease": "beta"
       }
-    ],
-    "publishConfig": {
-      "access": "public"
-    }
+    ]
   }
 }
