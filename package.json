@@ -62,5 +62,15 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "release": {
+    "branches": [
+      "master",
+      "next",
+      {
+        "name": "develop",
+        "prerelease": true
+      }
+    ]
   }
 }
