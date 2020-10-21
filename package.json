@@ -1,5 +1,5 @@
 {
-  "name": "@magento/product-recommendations",
+  "name": "recommendations-pwa-collector",
   "version": "0.0.0-development",
   "main": "./lib/index.js",
   "license": "MIT",
