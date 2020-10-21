@@ -70,6 +70,9 @@
         "name": "develop",
         "prerelease": "beta"
       }
-    ]
+    ],
+    "publishConfig": {
+      "access": "public"
+    }
   }
 }
