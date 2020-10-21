@@ -14,7 +14,8 @@ pipeline {
     environment {
         HOME = "."
         TMPDIR = "./temp"
-        NPM_TOKEN = credentials("npm-token")
+        NPM_TOKEN = credentials("delorey-npm-token")
+        GH_TOKEN = credentials("semantic-release-github-token")
         TESSA2_API_KEY = credentials("tessa2-api-key")
         // Match pattern like v1.0.1-rc.1 or v1.0.1 for a release
         tag = sh(returnStdout: true, script: 'git tag --contains').trim()
@@ -46,6 +47,14 @@ pipeline {
         stage("Scan") {
             steps {
                 sh "npm run tessa"
+            }
+        }
+
+        stage("deploy") {
+            steps {
+                sh '''
+                    npx semantic-release --dry-run
+                '''
             }
         }
     }
