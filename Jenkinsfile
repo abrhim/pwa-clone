@@ -53,7 +53,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    npx semantic-release
+                    npx semantic-release --dry-run
                 '''
             }
         }
