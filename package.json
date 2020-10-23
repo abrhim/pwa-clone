@@ -1,6 +1,6 @@
 {
   "name": "recommendations-pwa-collector",
-  "version": "0.0.0-development",
+  "version": "v1.0.0-beta.10",
   "main": "./lib/index.js",
   "license": "MIT",
   "pwa-studio": {
@@ -68,10 +68,15 @@
   },
   "release": {
     "branches": [
-      "master",
+      {
+        "name": "master",
+        "prerelease": "beta",
+        "channel": "beta"
+      },
       {
         "name": "develop",
-        "prerelease": "beta"
+        "prerelease": "alpha",
+        "channel": "alpha"
       }
     ]
   }

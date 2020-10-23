@@ -17,6 +17,7 @@ pipeline {
         NPM_TOKEN = credentials("delorey-npm-token")
         GH_TOKEN = credentials("semantic-release-github-token")
         TESSA2_API_KEY = credentials("tessa2-api-key")
+        MAGENTO_CLOUD_CLI_TOKEN = credentials("delorey-magento-cloud-token")
     }
 
     stages {
