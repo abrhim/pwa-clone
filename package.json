@@ -68,6 +68,7 @@
   },
   "release": {
     "branches": [
+      "prod",
       {
         "name": "master",
         "prerelease": "beta",
