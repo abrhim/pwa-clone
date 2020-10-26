@@ -58,6 +58,18 @@ pipeline {
                 '''
             }
         }
+
+        stage("redeploy cloud") {
+            when {
+                branch 'develop'
+            }
+            steps {
+                sh '''
+                    magento-cloud project:clear-build-cache -p 5k2ulbou6q5ti 
+                    magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master
+                '''
+            }
+        }
     }
 
     post {
