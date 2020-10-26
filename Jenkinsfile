@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             label "worker"
-            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws-magento-cli:11-01"
+            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws-magento-cli:11-03"
             args  '-v /etc/passwd:/etc/passwd'
             registryUrl "https://docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com"
             registryCredentialsId "artifactory-datasoln"
@@ -65,8 +65,8 @@ pipeline {
             }
             steps {
                 sh '''
-                    magento-cloud project:clear-build-cache -p 5k2ulbou6q5ti 
-                    magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master
+                    /bin/magento-cloud project:clear-build-cache -p 5k2ulbou6q5ti 
+                    /bin/magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master
                 '''
             }
         }
