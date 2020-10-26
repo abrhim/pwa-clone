@@ -66,7 +66,7 @@ pipeline {
             steps {
                 sh '''
                     /bin/magento-cloud project:clear-build-cache -p 5k2ulbou6q5ti 
-                    /bin/magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master
+                    /bin/magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master --yes
                 '''
             }
         }
