@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    npx semantic-release --dry-run
+                    npx semantic-release
                 '''
             }
         }
@@ -64,12 +64,22 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                sh '''
-                    /bin/magento-cloud project:clear-build-cache -p 5k2ulbou6q5ti 
-                    /bin/magento-cloud env:redeploy -p 5k2ulbou6q5ti -e master --yes
-                '''
+                withGitSsh('magjenkinscloud') {
+                    sh '''
+                        if [ -d "mikita-klimiankou-test" ]; then rm -Rf mikita-klimiankou-test; fi
+                        git clone --branch master 5k2ulbou6q5ti@git.us-4.magento.cloud:5k2ulbou6q5ti.git mikita-klimiankou-test
+                        cd mikita-klimiankou-test
+                        git config --global user.email "data-solutions-jenkins@adobe.com"
+                        git config --global user.name "data-solutions-jenkins"
+                        [ -e ./app/code/temp.txt ] && rm ./app/code/temp.txt || touch ./app/code/temp.txt
+                        git add .
+                        git commit -m "building cloud instance"
+                        git push
+                    '''
+                }
             }
         }
+    }
     }
 
     post {
