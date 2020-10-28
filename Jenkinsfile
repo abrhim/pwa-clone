@@ -44,7 +44,6 @@ pipeline {
             when {
                 anyOf {
                     branch 'master'
-                    branch 'develop'
                 }
             }
             steps {
@@ -55,7 +54,7 @@ pipeline {
         }
         stage("redeploy cloud") {
             when {
-                branch 'develop'
+                branch 'master'
             }
             steps {
                 withGitSsh('magjenkinscloud') {
