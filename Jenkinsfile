@@ -1,5 +1,4 @@
 @Library("jenkins-pipeline-libraries") _
-
 pipeline {
     agent {
         docker {
@@ -10,7 +9,6 @@ pipeline {
             registryCredentialsId "artifactory-datasoln"
         }
     }
-
     environment {
         HOME = "."
         TMPDIR = "./temp"
@@ -19,32 +17,28 @@ pipeline {
         TESSA2_API_KEY = credentials("tessa2-api-key")
         MAGENTO_CLOUD_CLI_TOKEN = credentials("delorey-magento-cloud-token")
     }
-
     stages {
         stage("Install") {
           steps {
             sh "npm install"
           }
         }
-        
+
         stage("Lint") {
             steps {
                 sh "npm run lint"
             }
         }
-
         stage("Test") {
             steps {
                 sh "npm run test"
             }
         }
-
         stage("Scan") {
             steps {
                 sh "npm run tessa"
             }
         }
-
         stage("deploy") {
             when {
                 anyOf {
@@ -58,7 +52,6 @@ pipeline {
                 '''
             }
         }
-
         stage("redeploy cloud") {
             when {
                 branch 'develop'
@@ -80,8 +73,6 @@ pipeline {
             }
         }
     }
-    }
-
     post {
         always {
             slack(currentBuild.result, "#datasolutions-jenkins")
