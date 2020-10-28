@@ -1,4 +1,5 @@
-@Library("jenkins-pipeline-libraries") _
+@Library(['jenkins-pipeline-libraries', 'magento-saas-pipeline@0.2.0']) _
+
 pipeline {
     agent {
         docker {
@@ -59,7 +60,6 @@ pipeline {
             steps {
                 withGitSsh('magjenkinscloud') {
                     sh '''
-                        if [ -d "mikita-klimiankou-test" ]; then rm -Rf mikita-klimiankou-test; fi
                         git clone --branch master 5k2ulbou6q5ti@git.us-4.magento.cloud:5k2ulbou6q5ti.git mikita-klimiankou-test
                         cd mikita-klimiankou-test
                         git config --global user.email "data-solutions-jenkins@adobe.com"
@@ -68,6 +68,7 @@ pipeline {
                         git add .
                         git commit -m "building cloud instance"
                         git push
+                        rm -Rf mikita-klimiankou-test
                     '''
                 }
             }
