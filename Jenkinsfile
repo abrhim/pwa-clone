@@ -1,64 +1,78 @@
-@Library("jenkins-pipeline-libraries") _
+@Library(['jenkins-pipeline-libraries', 'magento-saas-pipeline@0.2.0']) _
 
 pipeline {
     agent {
         docker {
             label "worker"
-            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws:11.15.0-10"
+            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws-magento-cli:11-03"
             args  '-v /etc/passwd:/etc/passwd'
             registryUrl "https://docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com"
             registryCredentialsId "artifactory-datasoln"
         }
     }
-
     environment {
         HOME = "."
         TMPDIR = "./temp"
         NPM_TOKEN = credentials("delorey-npm-token")
         GH_TOKEN = credentials("semantic-release-github-token")
         TESSA2_API_KEY = credentials("tessa2-api-key")
+        MAGENTO_CLOUD_CLI_TOKEN = credentials("delorey-magento-cloud-token")
     }
-
     stages {
         stage("Install") {
           steps {
             sh "npm install"
           }
         }
-        
+
         stage("Lint") {
             steps {
                 sh "npm run lint"
             }
         }
-
         stage("Test") {
             steps {
                 sh "npm run test"
             }
         }
-
         stage("Scan") {
             steps {
                 sh "npm run tessa"
             }
         }
-
         stage("deploy") {
             when {
                 anyOf {
                     branch 'master'
-                    branch 'develop'
                 }
             }
             steps {
                 sh '''
-                    npx semantic-release --dry-run
+                    npx semantic-release
                 '''
             }
         }
+        stage("redeploy cloud") {
+            when {
+                branch 'master'
+            }
+            steps {
+                withGitSsh('magjenkinscloud') {
+                    sh '''
+                        git clone --branch master 5k2ulbou6q5ti@git.us-4.magento.cloud:5k2ulbou6q5ti.git mikita-klimiankou-test
+                        cd mikita-klimiankou-test
+                        git config --global user.email "data-solutions-jenkins@adobe.com"
+                        git config --global user.name "data-solutions-jenkins"
+                        [ -e ./app/code/temp.txt ] && rm ./app/code/temp.txt || touch ./app/code/temp.txt
+                        git add .
+                        git commit -m "building cloud instance"
+                        git push
+                        rm -Rf mikita-klimiankou-test
+                    '''
+                }
+            }
+        }
     }
-
     post {
         always {
             slack(currentBuild.result, "#datasolutions-jenkins")

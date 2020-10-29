@@ -1,6 +1,6 @@
 {
   "name": "recommendations-pwa-collector",
-  "version": "0.0.0-development",
+  "version": "v1.0.0-beta.10",
   "main": "./lib/index.js",
   "license": "MIT",
   "pwa-studio": {
@@ -9,6 +9,7 @@
     }
   },
   "scripts": {
+    "cm": "cz",
     "format": "npm run prettier -- --write",
     "lint": "eslint 'lib/**/*'",
     "lint:fix": "npm run lint -- --fix",
@@ -23,7 +24,9 @@
     "@magento/peregrine": "~6.0.0",
     "@magento/venia-ui": "~6.0.0",
     "react": "~16.9.0",
-    "react-router-dom": "~5.1.0"
+    "react-router-dom": "~5.1.0",
+    "eslint-plugin-react": "~7.21.5",
+    "eslint-plugin-react-hooks": "~2.0.1"
   },
   "devDependencies": {
     "@adobe/tessa-npm-plugin": "1.4.2",
@@ -65,10 +68,16 @@
   },
   "release": {
     "branches": [
-      "master",
+      "prod",
+      {
+        "name": "master",
+        "prerelease": "beta",
+        "channel": "beta"
+      },
       {
         "name": "develop",
-        "prerelease": "beta"
+        "prerelease": "alpha",
+        "channel": "alpha"
       }
     ]
   }
