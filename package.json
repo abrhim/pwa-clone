@@ -8,6 +8,9 @@
       "intercept": "./lib/targets/intercept.js"
     }
   },
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "cm": "cz",
     "format": "npm run prettier -- --write",
