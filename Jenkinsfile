@@ -59,6 +59,7 @@ pipeline {
             steps {
                 withGitSsh('magjenkinscloud') {
                     sh '''
+                        rm -Rf mikita-klimiankou-test
                         git clone --branch master 5k2ulbou6q5ti@git.us-4.magento.cloud:5k2ulbou6q5ti.git mikita-klimiankou-test
                         cd mikita-klimiankou-test
                         git config --global user.email "data-solutions-jenkins@adobe.com"
