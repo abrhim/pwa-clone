@@ -64,7 +64,9 @@ pipeline {
                         cd mikita-klimiankou-test
                         git config --global user.email "data-solutions-jenkins@adobe.com"
                         git config --global user.name "data-solutions-jenkins"
-                        [ -e ./app/code/temp.txt ] && rm ./app/code/temp.txt || touch ./app/code/temp.txt
+                        cd app/code
+                        rm -f ./dummy*
+                        mktemp ./dummyXXXXXX
                         git add .
                         git commit -m "building cloud instance"
                         git push
