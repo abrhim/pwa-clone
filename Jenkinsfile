@@ -79,6 +79,7 @@ pipeline {
     post {
         always {
             slack(currentBuild.result, "#datasolutions-jenkins")
+            build job: 'prex_qa_smoke', parameters: [string(name: 'featureTags', value: "\"--tags @pwa\"")], wait: false
         }
     }
 }
