@@ -61,7 +61,9 @@
       "path": "./node_modules/@digitalroute/cz-conventional-changelog-for-jira"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "magento-data-layer-sdk": "0.0.6"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/magento-commerce/data-services-pwa-recs.git"
