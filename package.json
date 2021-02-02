@@ -62,7 +62,7 @@
     }
   },
   "dependencies": {
-    "magento-data-layer-sdk": "0.0.6"
+    "magento-data-layer-sdk": "0.0.7"
   },
   "repository": {
     "type": "git",
