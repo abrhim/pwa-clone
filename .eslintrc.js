@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'prettier',
+    'plugin:jest/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
