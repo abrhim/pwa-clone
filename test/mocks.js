@@ -84,3 +84,172 @@ export const generateShoppingCart = overrides => ({
   subtotalIncludingTax: 124,
   ...overrides,
 });
+
+export const sampleGraphQLCart = {
+  __typename: 'Cart',
+  id: '4yG9W7GyEUB5z1Sovd9Htf2IlmdoArVn',
+  total_quantity: 4,
+  prices: {
+    __typename: 'CartPrices',
+    subtotal_excluding_tax: { __typename: 'Money', value: 432 },
+    subtotal_including_tax: { __typename: 'Money', value: 432 },
+  },
+  items: [
+    {
+      __typename: 'ConfigurableCartItem',
+      id: '477',
+      can_apply_msrp: false,
+      formatted_price: '<span class="price">$108.00</span>',
+      product_configuration_options: [
+        { __typename: 'ProductOptions', product: null },
+        { __typename: 'ProductOptions', product: null },
+      ],
+      product: {
+        __typename: 'ConfigurableProduct',
+        id: 1144,
+        name: 'Selena Pants',
+        url_key: 'selena-pants',
+        url_suffix: '.html',
+        is_visible_in_site_visibility: true,
+        sku: 'VP01',
+        product_has_url: true,
+        image: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+        },
+        thumbnail: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+          label: 'Main',
+        },
+      },
+      prices: {
+        __typename: 'CartItemPrices',
+        price: { __typename: 'Money', currency: 'USD', value: 108 },
+      },
+      quantity: 1,
+      configurable_options: [
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 180,
+          option_label: 'Fashion Color',
+          value_id: 23,
+          value_label: 'Lilac',
+        },
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 183,
+          option_label: 'Fashion Size',
+          value_id: 30,
+          value_label: 'M',
+        },
+      ],
+    },
+    {
+      __typename: 'ConfigurableCartItem',
+      id: '479',
+      can_apply_msrp: false,
+      formatted_price: '<span class="price">$108.00</span>',
+      product_configuration_options: [
+        { __typename: 'ProductOptions', product: null },
+        { __typename: 'ProductOptions', product: null },
+      ],
+      product: {
+        __typename: 'ConfigurableProduct',
+        id: 1144,
+        name: 'Selena Pants',
+        url_key: 'selena-pants',
+        url_suffix: '.html',
+        is_visible_in_site_visibility: true,
+        sku: 'VP01',
+        product_has_url: true,
+        image: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+        },
+        thumbnail: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+          label: 'Main',
+        },
+      },
+      prices: {
+        __typename: 'CartItemPrices',
+        price: { __typename: 'Money', currency: 'USD', value: 108 },
+      },
+      quantity: 2,
+      configurable_options: [
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 180,
+          option_label: 'Fashion Color',
+          value_id: 23,
+          value_label: 'Lilac',
+        },
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 183,
+          option_label: 'Fashion Size',
+          value_id: 29,
+          value_label: 'L',
+        },
+      ],
+    },
+    {
+      __typename: 'ConfigurableCartItem',
+      id: '481',
+      can_apply_msrp: false,
+      formatted_price: '<span class="price">$108.00</span>',
+      product_configuration_options: [
+        { __typename: 'ProductOptions', product: null },
+        { __typename: 'ProductOptions', product: null },
+      ],
+      product: {
+        __typename: 'ConfigurableProduct',
+        id: 1144,
+        name: 'Selena Pants',
+        url_key: 'selena-pants',
+        url_suffix: '.html',
+        is_visible_in_site_visibility: true,
+        sku: 'VP01',
+        product_has_url: true,
+        image: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+        },
+        thumbnail: {
+          __typename: 'ProductImage',
+          url:
+            'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+          label: 'Main',
+        },
+      },
+      prices: {
+        __typename: 'CartItemPrices',
+        price: { __typename: 'Money', currency: 'USD', value: 108 },
+      },
+      quantity: 1,
+      configurable_options: [
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 180,
+          option_label: 'Fashion Color',
+          value_id: 25,
+          value_label: 'Mint',
+        },
+        {
+          __typename: 'SelectedConfigurableOption',
+          id: 183,
+          option_label: 'Fashion Size',
+          value_id: 30,
+          value_label: 'M',
+        },
+      ],
+    },
+  ],
+};
