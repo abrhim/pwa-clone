@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useActivitySummaryInterval, {
   PING_INTERVAL,
-} from '../../lib/hooks/useActivitySummaryInterval';
+} from '../../lib/collector/hooks/useActivitySummaryInterval';
 import mdl from 'magento-data-layer-sdk';
 
 const offsets = {

@@ -63,25 +63,35 @@ export const generateProductContext = overrides => ({
 });
 
 export const generateShoppingCart = overrides => ({
-  cartId: 1234,
+  id: 1234,
   giftMessageSelected: true,
   giftWrappingSelected: true,
   items: [
     {
+      product: {
+        name: 'my product',
+        image: {
+          url: 'https://test.com/cool.jpg',
+        },
+        sku: '1234',
+      },
       basePrice: 1.23,
-      cartItemId: 1234,
-      mainImageUrl: 'https://test.com/cool.jpg',
-      offerPrice: 1.23,
-      productName: 'my product',
-      productSku: '1234',
-      qty: 100,
+      id: 1234,
+      quantity: 100,
+      prices: {
+        price: {
+          value: 1.23,
+        },
+      },
     },
   ],
-  itemsCount: 100,
+  totalQuantity: 100,
   possibleOnepageCheckout: false,
   subtotalAmount: 123,
-  subtotalExcludingTax: 123,
-  subtotalIncludingTax: 124,
+  prices: {
+    subtotalExcludingTax: { value: 123 },
+    subtotalIncludingTax: { value: 124 },
+  },
   ...overrides,
 });
 

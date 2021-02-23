@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePageView from '../../lib/hooks/usePageView';
+import usePageView from '../../lib/collector/hooks/usePageView';
 import mdl from 'magento-data-layer-sdk';
 
 const firstLocation = {

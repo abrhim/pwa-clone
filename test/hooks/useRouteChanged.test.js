@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useRouteChanged from '../../lib/hooks/useRouteChanged';
-import useLocation from '../../lib/hooks/useLocation';
-jest.mock('../../lib/hooks/useLocation');
+import useRouteChanged from '../../lib/collector/hooks/useRouteChanged';
+import useLocation from '../../lib/collector/hooks/useLocation';
+jest.mock('../../lib/collector/hooks/useLocation');
 // useRouteChanged calls useLocation to determine if the route has changed
 // based on the pathname of the current route.
 useLocation

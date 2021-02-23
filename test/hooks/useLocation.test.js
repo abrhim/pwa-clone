@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useLocation from '../../lib/hooks/useLocation';
+import useLocation from '../../lib/collector/hooks/useLocation';
 
 const first = {
   pathname: '/first',

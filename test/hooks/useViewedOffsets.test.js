@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useViewedOffsets from '../../lib/hooks/useViewedOffsets';
+import useViewedOffsets from '../../lib/collector/hooks/useViewedOffsets';
 
 test('handles scroll events', () => {
   jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
