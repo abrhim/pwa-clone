@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import wrapUseMyAccount from '../../lib/collector/wrappers/wrapUseMyAccount';
 import mdl from 'magento-data-layer-sdk';
 
-test('useLocation only sets state when pathname changes', () => {
+test('both original function and wrapper functionality are run in the hook', () => {
   const handleSignOut = jest.fn();
   const functionToWrap = jest.fn().mockReturnValue({
     handleSignOut,
