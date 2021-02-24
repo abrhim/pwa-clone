@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useStorefrontInstanceContext from '../../lib/hooks/useStorefrontInstanceContext';
+import useStorefrontInstanceContext from '../../lib/collector/hooks/useStorefrontInstanceContext';
 import mdl from 'magento-data-layer-sdk';
 import { useQuery } from '@apollo/client';
 

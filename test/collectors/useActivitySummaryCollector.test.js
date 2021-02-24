@@ -1,13 +1,13 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useActivitySummaryCollector from '../../lib/collectors/useActivitySummaryCollector';
-import useActivitySummaryInterval from '../../lib/hooks/useActivitySummaryInterval';
-import usePageUnload from '../../lib/hooks/usePageUnload';
-import usePageHidden from '../../lib/hooks/usePageHidden';
-import useRouteChanged from '../../lib/hooks/useRouteChanged';
-jest.mock('../../lib/hooks/useActivitySummaryInterval');
-jest.mock('../../lib/hooks/usePageUnload');
-jest.mock('../../lib/hooks/usePageHidden');
-jest.mock('../../lib/hooks/useRouteChanged');
+import useActivitySummaryCollector from '../../lib/collector/collectors/useActivitySummaryCollector';
+import useActivitySummaryInterval from '../../lib/collector/hooks/useActivitySummaryInterval';
+import usePageUnload from '../../lib/collector/hooks/usePageUnload';
+import usePageHidden from '../../lib/collector/hooks/usePageHidden';
+import useRouteChanged from '../../lib/collector/hooks/useRouteChanged';
+jest.mock('../../lib/collector/hooks/useActivitySummaryInterval');
+jest.mock('../../lib/collector/hooks/usePageUnload');
+jest.mock('../../lib/collector/hooks/usePageHidden');
+jest.mock('../../lib/collector/hooks/useRouteChanged');
 
 test('calls child hooks', () => {
   renderHook(() => useActivitySummaryCollector());

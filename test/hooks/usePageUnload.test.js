@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePageUnload from '../../lib/hooks/usePageUnload';
+import usePageUnload from '../../lib/collector/hooks/usePageUnload';
 
 test('updates pageOffsets context and sends pageSummary event', () => {
   const onBeforeUnload = jest.fn();

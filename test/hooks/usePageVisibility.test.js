@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import usePageVisibility from '../../lib/hooks/usePageVisibility';
+import usePageVisibility from '../../lib/collector/hooks/usePageVisibility';
 
 const first = {
   pathname: '/first',

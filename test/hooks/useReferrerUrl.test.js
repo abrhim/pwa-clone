@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useReferrerUrl from '../../lib/hooks/useReferrerUrl';
+import useReferrerUrl from '../../lib/collector/hooks/useReferrerUrl';
 import mdl from 'magento-data-layer-sdk';
 
 const firstLocation = {

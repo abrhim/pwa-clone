@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePageHidden from '../../lib/hooks/usePageHidden';
+import usePageHidden from '../../lib/collector/hooks/usePageHidden';
 import mdl from 'magento-data-layer-sdk';
 
 test('updates pageOffsets context and sends pageSummary event', () => {

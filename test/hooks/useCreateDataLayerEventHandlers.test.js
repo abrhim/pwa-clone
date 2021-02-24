@@ -1,11 +1,11 @@
-jest.mock('../../lib/util/createCollector');
-jest.mock('../../lib/collectors/useCollector');
+jest.mock('../../lib/collector/util/createCollector');
+jest.mock('../../lib/collector/collectors/useCollector');
 import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
   prepareProductContexts,
-} from '../../lib/hooks/useCreateDataLayerEventHandlers';
+} from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
 import mdl from 'magento-data-layer-sdk';
-import useCollector from '../../lib/collectors/useCollector';
+import useCollector from '../../lib/collector/collectors/useCollector';
 import {
   generateMagentoExtensionContext,
   generateProductContext,
@@ -18,7 +18,7 @@ import {
   SHOPPER_SCHEMA_URL,
   SHOPPING_CART_SCHEMA_URL,
   STOREFRONT_INSTANCE_SCHEMA_URL,
-} from '../../lib/constants';
+} from '../../lib/collector/constants';
 
 let collectorSpy = jest.fn();
 useCollector.mockReturnValue(collectorSpy);
@@ -203,7 +203,22 @@ test('prepareProductContext correctly formats context data', () => {
   expect(preparedContextsWithCart).toEqual([
     ...noCartResult,
     {
-      data: shoppingCartContext,
+      data: {
+        cartId: 0,
+        items: [
+          {
+            cartItemId: 1234,
+            mainImageUrl: 'https://test.com/cool.jpg',
+            offerPrice: 1.23,
+            productName: 'my product',
+            productSku: '1234',
+            qty: 100,
+          },
+        ],
+        itemsCount: 100,
+        subtotalExcludingTax: 123,
+        subtotalIncludingTax: 124,
+      },
       schema: SHOPPING_CART_SCHEMA_URL,
     },
   ]);
