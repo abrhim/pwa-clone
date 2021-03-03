@@ -2281,3 +2281,118 @@ export const fetchedRecs = {
     ],
   },
 };
+export const sampleGraphQLProduct = {
+  __typename: 'ConfigurableProduct',
+  id: 1144,
+  categories: [
+    {
+      __typename: 'CategoryTree',
+      id: 12,
+      breadcrumbs: [{ __typename: 'Breadcrumb', category_id: 11 }],
+    },
+  ],
+  description:
+    '<p>The Selena Pants are one of the more form-fitting pieces in the Venia collection. But don\'t be fooled by their appearance. These gems are made with soft pima cotton and just the right amount of stretch.</p><p>Features:</p><ul><li>Cotton waistband</li><li>Drawstring waist</li><li>Sits just below waist</li><li>31" inseam</li><li>Machine wash, line dry</li></ul>',
+  media_gallery_entries: [
+    {
+      __typename: 'MediaGalleryEntry',
+      id: 1238,
+      label: 'Main',
+      position: 1,
+      disabled: false,
+      file: '/v/p/vp01-ll_main_4.jpg',
+    },
+  ],
+  meta_description:
+    "The Selena Pants are one of the more form-fitting pieces in the Venia collection. But don't be fooled by their appearance. These gems are made with soft pima cotton and just the right amount of stretch. Features: Cotton waistband. Drawstring waist. Sits ",
+  name: 'Selena Pants',
+  price: {
+    __typename: 'ProductPrices',
+    regularPrice: {
+      __typename: 'Price',
+      amount: { __typename: 'Money', currency: 'USD', value: 108 },
+    },
+  },
+  sku: 'VP01',
+  small_image:
+    'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+  url_key: 'selena-pants',
+  configurable_options: [
+    {
+      __typename: 'ConfigurableProductOptions',
+      attribute_code: 'fashion_color',
+      attribute_id: '180',
+      id: 96,
+      label: 'Fashion Color',
+      values: [
+        {
+          __typename: 'ConfigurableProductOptionsValues',
+          default_label: 'Lilac',
+          label: 'Lilac',
+          store_label: 'Lilac',
+          use_default_value: true,
+          value_index: 23,
+          swatch_data: { __typename: 'ColorSwatchData', value: '#dcd5e1' },
+        },
+      ],
+    },
+    {
+      __typename: 'ConfigurableProductOptions',
+      attribute_code: 'fashion_size',
+      attribute_id: '183',
+      id: 97,
+      label: 'Fashion Size',
+      values: [
+        {
+          __typename: 'ConfigurableProductOptionsValues',
+          default_label: 'L',
+          label: 'L',
+          store_label: 'L',
+          use_default_value: true,
+          value_index: 29,
+          swatch_data: { __typename: 'TextSwatchData', value: 'L' },
+        },
+      ],
+    },
+  ],
+  variants: [
+    {
+      __typename: 'ConfigurableVariant',
+      attributes: [
+        {
+          __typename: 'ConfigurableAttributeOption',
+          code: 'fashion_color',
+          value_index: 27,
+        },
+        {
+          __typename: 'ConfigurableAttributeOption',
+          code: 'fashion_size',
+          value_index: 31,
+        },
+      ],
+      product: {
+        __typename: 'SimpleProduct',
+        id: 794,
+        media_gallery_entries: [
+          {
+            __typename: 'MediaGalleryEntry',
+            id: 804,
+            disabled: false,
+            file: '/v/p/vp01-la_main_2.jpg',
+            label: 'Main',
+            position: 1,
+          },
+        ],
+        sku: 'VP01-LA-S',
+        stock_status: 'IN_STOCK',
+        price: {
+          __typename: 'ProductPrices',
+          regularPrice: {
+            __typename: 'Price',
+            amount: { __typename: 'Money', currency: 'USD', value: 108 },
+          },
+        },
+      },
+    },
+  ],
+};
