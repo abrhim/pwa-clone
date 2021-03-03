@@ -85,7 +85,10 @@ test('add to cart event handled correctly', () => {
     null,
     null,
     [
-      undefined,
+      {
+        data: undefined,
+        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
+      },
       {
         data: undefined,
         schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
@@ -115,7 +118,10 @@ test('product page view event handled correctly', () => {
     null,
     null,
     [
-      undefined,
+      {
+        data: undefined,
+        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
+      },
       {
         data: undefined,
         schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
@@ -172,7 +178,16 @@ test('prepareProductContext correctly formats context data', () => {
   const shoppingCartContext = generateShoppingCart();
 
   const noCartResult = [
-    productContext,
+    {
+      data: {
+        categories: ['test'],
+        name: productContext.name,
+        productId: productContext.id,
+        sku: productContext.sku,
+        topLevelSku: productContext.sku,
+      },
+      schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
+    },
     {
       data: shopperContext,
       schema: SHOPPER_SCHEMA_URL,

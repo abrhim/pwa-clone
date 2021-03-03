@@ -35,11 +35,6 @@ pipeline {
                 sh "npm run test"
             }
         }
-        stage("Scan") {
-            steps {
-                sh "npm run tessa"
-            }
-        }
         stage("deploy") {
             when {
                 anyOf {
