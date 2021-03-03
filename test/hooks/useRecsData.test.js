@@ -8,6 +8,7 @@ jest.mock('@magento/recommendations-js-sdk', () => {
   return jest
     .fn()
     .mockImplementation(() => ({ fetchPreconfigured: mockFetchPreconfigured }));
+  //   return  fetchPreconfigured: jest.fn() };
 });
 
 jest.mock('magento-data-layer-sdk', () => ({
