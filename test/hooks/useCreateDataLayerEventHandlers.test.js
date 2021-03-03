@@ -20,6 +20,10 @@ import {
   STOREFRONT_INSTANCE_SCHEMA_URL,
 } from '../../lib/collector/constants';
 
+jest.mock('../../package.json', () => ({
+  version: '1.2.3',
+}));
+
 let collectorSpy = jest.fn();
 useCollector.mockReturnValue(collectorSpy);
 
