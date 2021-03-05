@@ -29,36 +29,117 @@ export const generateMagentoExtensionContext = overrides => ({
 });
 
 export const generateProductContext = overrides => ({
-  productId: 1234,
-  name: 'my product',
-  sku: '1234',
-  topLevelSku: '123456',
-  specialToDate: '1-2-2021',
-  specialFromDate: '1-2-2021',
-  newToDate: '1-2-2021',
-  newFromDate: '1-2-2021',
-  createdAt: '1-2-2021',
-  updatedAt: '1-2-2021',
-  manufacturer: 'magento industries',
-  countryOfManufacture: 'USA',
-  categories: [{ id: 'test' }],
-  productType: 'cool',
-  pricing: {
-    regularPrice: 1.23,
-    minimalPrice: 1.23,
-    maximalPrice: 1.23,
-    specialPrice: 1.24,
-    tierPricing: [
-      {
-        customerGroupId: 12345,
-        qty: 100,
-        value: 1.23,
+  id: 1144,
+  categories: [
+    {
+      id: 12,
+      breadcrumbs: [
+        {
+          categoryId: 11,
+        },
+      ],
+    },
+  ],
+  description:
+    '<p>The Selena Pants are one of the more form-fitting pieces in the Venia collection. But don\'t be fooled by their appearance. These gems are made with soft pima cotton and just the right amount of stretch.</p><p>Features:</p><ul><li>Cotton waistband</li><li>Drawstring waist</li><li>Sits just below waist</li><li>31" inseam</li><li>Machine wash, line dry</li></ul>',
+  mediaGalleryEntries: [
+    {
+      id: 1238,
+      label: 'Main',
+      position: 1,
+      disabled: false,
+      file: '/v/p/vp01-ll_main_4.jpg',
+    },
+  ],
+  metaDescription:
+    "The Selena Pants are one of the more form-fitting pieces in the Venia collection. But don't be fooled by their appearance. These gems are made with soft pima cotton and just the right amount of stretch. Features: Cotton waistband. Drawstring waist. Sits ",
+  name: 'Selena Pants',
+  price: {
+    regularPrice: {
+      amount: {
+        currency: 'USD',
+        value: 108,
       },
-    ],
-    currencyCode: 'USD',
+    },
   },
-  canonicalUrl: 'https://test.com',
-  mainImageUrl: 'https://test.com/cool.jpg',
+  sku: 'VP01',
+  smallImage:
+    'https://master-7rqtwti-5k2ulbou6q5ti.us-4.magentosite.cloud/media/catalog/product/cache/18e351d3d205c0264ac03dce60b9880e/v/p/vp01-ll_main_4.jpg',
+  urlKey: 'selena-pants',
+  configurableOptions: [
+    {
+      attributeCode: 'fashion_color',
+      attributeId: '180',
+      id: 96,
+      label: 'Fashion Color',
+      values: [
+        {
+          defaultLabel: 'Lilac',
+          label: 'Lilac',
+          storeLabel: 'Lilac',
+          useDefaultValue: true,
+          valueIndex: 23,
+          swatchData: {
+            value: '#dcd5e1',
+          },
+        },
+      ],
+    },
+    {
+      attributeCode: 'fashion_size',
+      attributeId: '183',
+      id: 97,
+      label: 'Fashion Size',
+      values: [
+        {
+          defaultLabel: 'L',
+          label: 'L',
+          storeLabel: 'L',
+          useDefaultValue: true,
+          valueIndex: 29,
+          swatchData: {
+            value: 'L',
+          },
+        },
+      ],
+    },
+  ],
+  variants: [
+    {
+      attributes: [
+        {
+          code: 'fashion_color',
+          valueIndex: 27,
+        },
+        {
+          code: 'fashion_size',
+          valueIndex: 31,
+        },
+      ],
+      product: {
+        id: 794,
+        mediaGalleryEntries: [
+          {
+            id: 804,
+            disabled: false,
+            file: '/v/p/vp01-la_main_2.jpg',
+            label: 'Main',
+            position: 1,
+          },
+        ],
+        sku: 'VP01-LA-S',
+        stockStatus: 'IN_STOCK',
+        price: {
+          regularPrice: {
+            amount: {
+              currency: 'USD',
+              value: 108,
+            },
+          },
+        },
+      },
+    },
+  ],
   ...overrides,
 });
 

@@ -2,23 +2,11 @@ jest.mock('../../lib/collector/util/createCollector');
 jest.mock('../../lib/collector/collectors/useCollector');
 import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
-  prepareProductContexts,
+  prepareProductContext,
 } from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
 import mdl from 'magento-data-layer-sdk';
 import useCollector from '../../lib/collector/collectors/useCollector';
-import {
-  generateMagentoExtensionContext,
-  generateProductContext,
-  generateShopperContext,
-  generateShoppingCart,
-  generateStorefrontInstanceContext,
-} from '../mocks';
-import {
-  MAGENTO_EXTENSION_SCHEMA_URL,
-  SHOPPER_SCHEMA_URL,
-  SHOPPING_CART_SCHEMA_URL,
-  STOREFRONT_INSTANCE_SCHEMA_URL,
-} from '../../lib/collector/constants';
+import { generateProductContext } from '../mocks';
 
 jest.mock('../../package.json', () => ({
   version: '1.2.3',
@@ -88,26 +76,7 @@ test('add to cart event handled correctly', () => {
     null,
     null,
     null,
-    [
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
-      },
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/magento-extension/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/storefront-instance/jsonschema/2-0-0',
-      },
-    ],
+    [],
   );
 });
 
@@ -121,26 +90,7 @@ test('product page view event handled correctly', () => {
     null,
     null,
     null,
-    [
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
-      },
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/magento-extension/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/storefront-instance/jsonschema/2-0-0',
-      },
-    ],
+    [],
   );
 });
 
@@ -175,16 +125,12 @@ test('page view event handled correctly', () => {
 });
 
 test('prepareProductContext correctly formats context data', () => {
-  const shopperContext = generateShopperContext();
-  const storefrontInstanceContext = generateStorefrontInstanceContext();
-  const magentoExtensionContext = generateMagentoExtensionContext();
   const productContext = generateProductContext();
-  const shoppingCartContext = generateShoppingCart();
 
-  const noCartResult = [
+  const result = [
     {
       data: {
-        categories: ['test'],
+        categories: productContext.categories.map(cat => String(cat.id)),
         name: productContext.name,
         productId: productContext.id,
         sku: productContext.sku,
@@ -192,53 +138,11 @@ test('prepareProductContext correctly formats context data', () => {
       },
       schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
     },
-    {
-      data: shopperContext,
-      schema: SHOPPER_SCHEMA_URL,
-    },
-    {
-      data: magentoExtensionContext,
-      schema: MAGENTO_EXTENSION_SCHEMA_URL,
-    },
-    {
-      data: storefrontInstanceContext,
-      schema: STOREFRONT_INSTANCE_SCHEMA_URL,
-    },
   ];
 
-  mdl.context.setShopper(shopperContext);
-  mdl.context.setStorefrontInstance(storefrontInstanceContext);
-  mdl.context.setMagentoExtension(magentoExtensionContext);
   mdl.context.setProduct(productContext);
 
-  const preparedContexts = prepareProductContexts();
+  const preparedContexts = prepareProductContext();
 
-  expect(preparedContexts).toEqual(noCartResult);
-
-  mdl.context.setShoppingCart(shoppingCartContext);
-
-  const preparedContextsWithCart = prepareProductContexts();
-
-  expect(preparedContextsWithCart).toEqual([
-    ...noCartResult,
-    {
-      data: {
-        cartId: 0,
-        items: [
-          {
-            cartItemId: 1234,
-            mainImageUrl: 'https://test.com/cool.jpg',
-            offerPrice: 1.23,
-            productName: 'my product',
-            productSku: '1234',
-            qty: 100,
-          },
-        ],
-        itemsCount: 100,
-        subtotalExcludingTax: 123,
-        subtotalIncludingTax: 124,
-      },
-      schema: SHOPPING_CART_SCHEMA_URL,
-    },
-  ]);
+  expect(preparedContexts).toEqual(result);
 });
