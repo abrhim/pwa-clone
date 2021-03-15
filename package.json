@@ -1,6 +1,6 @@
 {
   "name": "recommendations-pwa-collector",
-  "version": "v1.0.0-beta.10",
+  "version": "v1.0.0-beta.20",
   "main": "./lib/index.js",
   "license": "MIT",
   "pwa-studio": {
@@ -89,7 +89,7 @@
     }
   },
   "dependencies": {
-    "@magento/recommendations-js-sdk": "^1.1.2",
+    "@magento/recommendations-js-sdk": "^1.1.3",
     "magento-data-layer-sdk": "0.0.9"
   },
   "repository": {
