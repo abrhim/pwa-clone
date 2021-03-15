@@ -91,7 +91,6 @@
   "dependencies": {
     "@magento/recommendations-js-sdk": "^1.1.2",
     "magento-data-layer-sdk": "0.0.9"
-
   },
   "repository": {
     "type": "git",
