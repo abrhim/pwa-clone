@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import usePageView from '../../lib/collector/hooks/usePageView';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 
 const firstLocation = {
   pathname: '/',

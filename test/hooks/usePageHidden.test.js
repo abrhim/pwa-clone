@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import usePageHidden from '../../lib/collector/hooks/usePageHidden';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 
 test('updates pageOffsets context and sends pageSummary event', () => {
   jest.spyOn(mdl.context, 'getPageOffset');
@@ -20,5 +20,4 @@ test('updates pageOffsets context and sends pageSummary event', () => {
     'visibilityHidden',
   );
   expect(mdl.context.setPageOffset.mock.calls[1][0].eventType).toBeUndefined();
-  expect(mdl.publish.pageActivitySummary).toHaveBeenCalledTimes(1);
 });

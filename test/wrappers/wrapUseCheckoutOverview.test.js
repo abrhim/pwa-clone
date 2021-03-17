@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import wrapUseCheckoutOverview from '../../lib/collector/wrappers/wrapUseCheckoutOverview';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 const cartId = 'test';
 jest.mock('@magento/peregrine/lib/context/cart', () => ({
   useCartContext: () => [{ cartId }],

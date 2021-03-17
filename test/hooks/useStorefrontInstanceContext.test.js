@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useStorefrontInstanceContext from '../../lib/collector/hooks/useStorefrontInstanceContext';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 import { useQuery } from '@apollo/client';
 
 jest.mock('@apollo/client', () => ({

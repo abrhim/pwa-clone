@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useMagentoExtensionContext from '../../lib/collector/hooks/useMagentoExtensionContext';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 
 const magentoExtensionContext = { magento_extension_version: '1.2.3' };
 

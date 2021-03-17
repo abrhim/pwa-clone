@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import wrapUseProductFullDetail from '../../lib/collector/wrappers/wrapUseProductFullDetail';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 import { sampleGraphQLProduct } from '../mocks';
 
 test('both original function and wrapper functionality are run in the hook', () => {

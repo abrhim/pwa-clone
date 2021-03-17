@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
   prepareProductContext,
 } from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 import useCollector from '../../lib/collector/collectors/useCollector';
 import { generateProductContext } from '../mocks';
 
@@ -18,7 +18,7 @@ useCollector.mockReturnValue(collectorSpy);
 test('subscribes to and unsubscribes from events', () => {
   const addToCart = jest.spyOn(mdl.subscribe, 'addToCart');
   const productPageView = jest.spyOn(mdl.subscribe, 'productPageView');
-  const pageActivitySummary = jest.spyOn(mdl.subscribe, 'pageActivitySummary');
+  const pageActivitySummary = jest.spyOn(mdl.subscribe, 'dataLayerChange');
   const customUrl = jest.spyOn(mdl.subscribe, 'customUrl');
   const referrerUrl = jest.spyOn(mdl.subscribe, 'referrerUrl');
   const pageView = jest.spyOn(mdl.subscribe, 'pageView');
@@ -29,7 +29,7 @@ test('subscribes to and unsubscribes from events', () => {
   );
   const unsubscribePageActivitySummary = jest.spyOn(
     mdl.unsubscribe,
-    'pageActivitySummary',
+    'dataLayerChange',
   );
   const unsubscribeCustomUrl = jest.spyOn(mdl.unsubscribe, 'customUrl');
   const unsubscribeReferrerUrl = jest.spyOn(mdl.unsubscribe, 'referrerUrl');
@@ -96,7 +96,7 @@ test('product page view event handled correctly', () => {
 
 test('page activity summary event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.pageActivitySummary();
+  mdl.context.setPageOffset(undefined);
   expect(collectorSpy).toHaveBeenLastCalledWith('trackSelfDescribingEvent', {
     data: undefined,
     schema: 'iglu:com.adobe.magento.event/activity-summary/jsonschema/1-0-0',

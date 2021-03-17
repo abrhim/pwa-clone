@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useActivitySummaryInterval, {
   PING_INTERVAL,
 } from '../../lib/collector/hooks/useActivitySummaryInterval';
-import mdl from 'magento-data-layer-sdk';
+import mdl from '@adobe/magento-data-layer-sdk';
 
 const offsets = {
   maxXOffset: 1024,
@@ -31,7 +31,6 @@ test('updates pageOffsets context and sends pageSummary event', () => {
     ping_interval: PING_INTERVAL,
     pings: pingsRef.current,
   });
-  expect(mdl.publish.pageActivitySummary).toHaveBeenCalledTimes(1);
 
   unmount();
   expect(window.clearInterval).toHaveBeenCalledTimes(1);
