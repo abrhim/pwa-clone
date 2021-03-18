@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useStorefrontInstanceContext from '../../lib/collector/hooks/useStorefrontInstanceContext';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 import { useQuery } from '@apollo/client';
 
 jest.mock('@apollo/client', () => ({
@@ -20,8 +20,8 @@ test('logs errors', () => {
   console.error = oldError;
 });
 
-test('populates mdl context', () => {
-  expect(mdl.context.getStorefrontInstance()).toBeUndefined();
+test('populates mse context', () => {
+  expect(mse.context.getStorefrontInstance()).toBeUndefined();
   const catalogExtensionVersion = '1.2.3';
   const environment = 'prod';
   const environmentId = 'prod';
@@ -55,7 +55,7 @@ test('populates mdl context', () => {
     },
   });
   renderHook(() => useStorefrontInstanceContext());
-  const storefrontInstance = mdl.context.getStorefrontInstance();
+  const storefrontInstance = mse.context.getStorefrontInstance();
   expect(storefrontInstance).toBeDefined();
   expect(storefrontInstance.environment).toEqual(environment);
   expect(storefrontInstance.catalogExtensionVersion).toEqual(

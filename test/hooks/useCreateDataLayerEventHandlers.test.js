@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
   prepareProductContext,
 } from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 import useCollector from '../../lib/collector/collectors/useCollector';
 import { generateProductContext } from '../mocks';
 
@@ -16,24 +16,24 @@ let collectorSpy = jest.fn();
 useCollector.mockReturnValue(collectorSpy);
 
 test('subscribes to and unsubscribes from events', () => {
-  const addToCart = jest.spyOn(mdl.subscribe, 'addToCart');
-  const productPageView = jest.spyOn(mdl.subscribe, 'productPageView');
-  const pageActivitySummary = jest.spyOn(mdl.subscribe, 'dataLayerChange');
-  const customUrl = jest.spyOn(mdl.subscribe, 'customUrl');
-  const referrerUrl = jest.spyOn(mdl.subscribe, 'referrerUrl');
-  const pageView = jest.spyOn(mdl.subscribe, 'pageView');
-  const unsubscribeAddToCart = jest.spyOn(mdl.unsubscribe, 'addToCart');
+  const addToCart = jest.spyOn(mse.subscribe, 'addToCart');
+  const productPageView = jest.spyOn(mse.subscribe, 'productPageView');
+  const pageActivitySummary = jest.spyOn(mse.subscribe, 'dataLayerChange');
+  const customUrl = jest.spyOn(mse.subscribe, 'customUrl');
+  const referrerUrl = jest.spyOn(mse.subscribe, 'referrerUrl');
+  const pageView = jest.spyOn(mse.subscribe, 'pageView');
+  const unsubscribeAddToCart = jest.spyOn(mse.unsubscribe, 'addToCart');
   const unsubscribeProductPageView = jest.spyOn(
-    mdl.unsubscribe,
+    mse.unsubscribe,
     'productPageView',
   );
   const unsubscribePageActivitySummary = jest.spyOn(
-    mdl.unsubscribe,
+    mse.unsubscribe,
     'dataLayerChange',
   );
-  const unsubscribeCustomUrl = jest.spyOn(mdl.unsubscribe, 'customUrl');
-  const unsubscribeReferrerUrl = jest.spyOn(mdl.unsubscribe, 'referrerUrl');
-  const unsubscribePageView = jest.spyOn(mdl.unsubscribe, 'pageView');
+  const unsubscribeCustomUrl = jest.spyOn(mse.unsubscribe, 'customUrl');
+  const unsubscribeReferrerUrl = jest.spyOn(mse.unsubscribe, 'referrerUrl');
+  const unsubscribePageView = jest.spyOn(mse.unsubscribe, 'pageView');
   const { rerender } = renderHook(() => useCreateDataLayerEventHandlers());
 
   // subscribers created on initial render
@@ -68,7 +68,7 @@ test('subscribes to and unsubscribes from events', () => {
 
 test('add to cart event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.addToCart();
+  mse.publish.addToCart();
   expect(collectorSpy).toHaveBeenLastCalledWith(
     'trackStructEvent',
     'product',
@@ -82,7 +82,7 @@ test('add to cart event handled correctly', () => {
 
 test('product page view event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.productPageView();
+  mse.publish.productPageView();
   expect(collectorSpy).toHaveBeenLastCalledWith(
     'trackStructEvent',
     'product',
@@ -96,7 +96,7 @@ test('product page view event handled correctly', () => {
 
 test('page activity summary event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.context.setPageOffset(undefined);
+  mse.context.setPageOffset(undefined);
   expect(collectorSpy).toHaveBeenLastCalledWith('trackSelfDescribingEvent', {
     data: undefined,
     schema: 'iglu:com.adobe.magento.event/activity-summary/jsonschema/1-0-0',
@@ -105,7 +105,7 @@ test('page activity summary event handled correctly', () => {
 
 test('custom url event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.customUrl();
+  mse.publish.customUrl();
   expect(collectorSpy).toHaveBeenLastCalledWith('trackSelfDescribingEvent', {
     data: undefined,
     schema: 'iglu:com.adobe.magento.event/activity-summary/jsonschema/1-0-0',
@@ -114,13 +114,13 @@ test('custom url event handled correctly', () => {
 
 test('referrer url event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.referrerUrl();
+  mse.publish.referrerUrl();
   expect(collectorSpy).toHaveBeenLastCalledWith('setReferrerUrl', undefined);
 });
 
 test('page view event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.pageView();
+  mse.publish.pageView();
   expect(collectorSpy).toHaveBeenLastCalledWith('trackPageView');
 });
 
@@ -140,7 +140,7 @@ test('prepareProductContext correctly formats context data', () => {
     },
   ];
 
-  mdl.context.setProduct(productContext);
+  mse.context.setProduct(productContext);
 
   const preparedContexts = prepareProductContext();
 
