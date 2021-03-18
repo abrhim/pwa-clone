@@ -43,8 +43,3 @@
     opacity: 1;
   }
 }
-
-.carousel {
-  composes: root;
-  composes: root from '../Slider/slider.css';
-}
