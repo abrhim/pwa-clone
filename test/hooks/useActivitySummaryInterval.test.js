@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useActivitySummaryInterval, {
   PING_INTERVAL,
 } from '../../lib/collector/hooks/useActivitySummaryInterval';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 
 const offsets = {
   maxXOffset: 1024,
@@ -16,14 +16,14 @@ const isVisible = true;
 test('updates pageOffsets context and sends pageSummary event', () => {
   window.setInterval = jest.fn().mockImplementation(cb => cb());
   window.clearInterval = jest.fn();
-  jest.spyOn(mdl.context, 'setPageOffset');
-  jest.spyOn(mdl.publish, 'pageActivitySummary');
+  jest.spyOn(mse.context, 'setPageOffset');
+  jest.spyOn(mse.publish, 'pageActivitySummary');
   const { unmount } = renderHook(() =>
     useActivitySummaryInterval(offsets, pingsRef, isVisible),
   );
   expect(window.setInterval).toHaveBeenCalledTimes(1);
-  expect(mdl.context.setPageOffset).toHaveBeenCalledTimes(1);
-  expect(mdl.context.setPageOffset).toHaveBeenCalledWith({
+  expect(mse.context.setPageOffset).toHaveBeenCalledTimes(1);
+  expect(mse.context.setPageOffset).toHaveBeenCalledWith({
     maxXOffset: offsets.maxXOffset,
     maxYOffset: offsets.maxYOffset,
     minXOffset: offsets.minXOffset,

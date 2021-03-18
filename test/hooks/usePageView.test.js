@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import usePageView from '../../lib/collector/hooks/usePageView';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 
 const firstLocation = {
   pathname: '/',
@@ -19,7 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 test('usePageView', () => {
   const pageViewSpy = jest.fn();
-  mdl.subscribe.pageView(pageViewSpy);
+  mse.subscribe.pageView(pageViewSpy);
   const { rerender } = renderHook(() => usePageView());
   expect(pageViewSpy).toHaveBeenCalledTimes(1);
   rerender();
