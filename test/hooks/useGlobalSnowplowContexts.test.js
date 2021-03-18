@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useGlobalSnowplowContexts from '../../lib/collector/hooks/useGlobalSnowplowContexts';
-import mdl from '@adobe/magento-storefront-events-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 import {
   generateMagentoExtensionContext,
   generateShopperContext,
@@ -33,7 +33,7 @@ test('snowplow collector updates global contexts when data layer changes', () =>
 
   // Storefront instance context
   const storefrontInstance = generateStorefrontInstanceContext();
-  mdl.context.setStorefrontInstance(storefrontInstance);
+  mse.context.setStorefrontInstance(storefrontInstance);
   expect(window.magento_store_events).toHaveBeenCalledWith(
     'removeGlobalContexts',
     [
@@ -55,7 +55,7 @@ test('snowplow collector updates global contexts when data layer changes', () =>
 
   // Magento extension context
   const magentoExtensionContext = generateMagentoExtensionContext();
-  mdl.context.setMagentoExtension(magentoExtensionContext);
+  mse.context.setMagentoExtension(magentoExtensionContext);
   expect(window.magento_store_events).toHaveBeenCalledWith(
     'removeGlobalContexts',
     [
@@ -77,7 +77,7 @@ test('snowplow collector updates global contexts when data layer changes', () =>
 
   // Shopper context
   const shopperContext = generateShopperContext();
-  mdl.context.setShopper(shopperContext);
+  mse.context.setShopper(shopperContext);
   expect(window.magento_store_events).toHaveBeenCalledWith(
     'removeGlobalContexts',
     [
@@ -99,7 +99,7 @@ test('snowplow collector updates global contexts when data layer changes', () =>
 
   // shopping cart context
   const shoppingCartContext = generateShoppingCart();
-  mdl.context.setShoppingCart(shoppingCartContext);
+  mse.context.setShoppingCart(shoppingCartContext);
   expect(window.magento_store_events).toHaveBeenCalledWith(
     'removeGlobalContexts',
     [
