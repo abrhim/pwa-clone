@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useActivitySummaryInterval, {
   PING_INTERVAL,
 } from '../../lib/collector/hooks/useActivitySummaryInterval';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 
 const offsets = {
   maxXOffset: 1024,

@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useCustomUrl from '../../lib/collector/hooks/useCustomUrl';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 
 const first = {
   pathname: '/first',

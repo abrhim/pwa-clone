@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import usePageHidden from '../../lib/collector/hooks/usePageHidden';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 
 test('updates pageOffsets context and sends pageSummary event', () => {
   jest.spyOn(mdl.context, 'getPageOffset');

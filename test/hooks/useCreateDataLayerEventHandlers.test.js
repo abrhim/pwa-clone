@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
   prepareProductContext,
 } from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 import useCollector from '../../lib/collector/collectors/useCollector';
 import { generateProductContext } from '../mocks';
 

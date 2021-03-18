@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useGlobalSnowplowContexts from '../../lib/collector/hooks/useGlobalSnowplowContexts';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 import {
   generateMagentoExtensionContext,
   generateShopperContext,

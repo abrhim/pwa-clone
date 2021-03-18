@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useShopperContext from '../../lib/collector/hooks/useShopperContext';
-import mdl from '@adobe/magento-data-layer-sdk';
+import mdl from '@adobe/magento-storefront-events-sdk';
 
 jest.mock('@magento/peregrine/lib/context/user', () => ({
   useUserContext: jest
