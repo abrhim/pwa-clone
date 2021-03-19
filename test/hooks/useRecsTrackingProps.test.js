@@ -1,17 +1,16 @@
 import useRecsTrackingProps from '../../lib/recommendations/hooks/useRecsTrackingProps';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { fetchedRecs } from '../mocks';
-import { PageTypes, CMS } from '../../lib/recommendations/constants';
+import { CMS } from '../../lib/recommendations/constants';
 
 const mockFetchPreconfigured = jest.fn();
 jest.mock('@magento/recommendations-js-sdk', () => {
   return jest
     .fn()
     .mockImplementation(() => ({ fetchPreconfigured: mockFetchPreconfigured }));
-  //   return  fetchPreconfigured: jest.fn() };
 });
 
-jest.mock('magento-data-layer-sdk', () => ({
+jest.mock('@adobe/magento-storefront-events-sdk', () => ({
   context: {
     getStorefrontInstance: jest.fn().mockReturnValue({ environmentId: 'id' }),
   },
