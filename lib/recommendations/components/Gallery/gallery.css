@@ -11,7 +11,7 @@
   grid-template-columns: repeat(5, 1fr);
   margin-left: 2em;
   margin-right: 2em;
-  margin-bottom: 10px;
+  margin-bottom: 60px;
   display: grid;
   grid-area: items;
   grid-gap: 1rem;
