@@ -11,7 +11,7 @@ jest.mock('@magento/recommendations-js-sdk', () => {
   //   return  fetchPreconfigured: jest.fn() };
 });
 
-jest.mock('magento-data-layer-sdk', () => ({
+jest.mock('@adobe/magento-storefront-events-sdk', () => ({
   context: {
     getStorefrontInstance: jest.fn().mockReturnValue({ environmentId: 'id' }),
   },

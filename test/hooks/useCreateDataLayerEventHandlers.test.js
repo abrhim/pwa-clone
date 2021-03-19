@@ -2,46 +2,38 @@ jest.mock('../../lib/collector/util/createCollector');
 jest.mock('../../lib/collector/collectors/useCollector');
 import { renderHook } from '@testing-library/react-hooks';
 import useCreateDataLayerEventHandlers, {
-  prepareProductContexts,
+  prepareProductContext,
 } from '../../lib/collector/hooks/useCreateDataLayerEventHandlers';
-import mdl from 'magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 import useCollector from '../../lib/collector/collectors/useCollector';
-import {
-  generateMagentoExtensionContext,
-  generateProductContext,
-  generateShopperContext,
-  generateShoppingCart,
-  generateStorefrontInstanceContext,
-} from '../mocks';
-import {
-  MAGENTO_EXTENSION_SCHEMA_URL,
-  SHOPPER_SCHEMA_URL,
-  SHOPPING_CART_SCHEMA_URL,
-  STOREFRONT_INSTANCE_SCHEMA_URL,
-} from '../../lib/collector/constants';
+import { generateProductContext } from '../mocks';
+
+jest.mock('../../package.json', () => ({
+  version: '1.2.3',
+}));
 
 let collectorSpy = jest.fn();
 useCollector.mockReturnValue(collectorSpy);
 
 test('subscribes to and unsubscribes from events', () => {
-  const addToCart = jest.spyOn(mdl.subscribe, 'addToCart');
-  const productPageView = jest.spyOn(mdl.subscribe, 'productPageView');
-  const pageActivitySummary = jest.spyOn(mdl.subscribe, 'pageActivitySummary');
-  const customUrl = jest.spyOn(mdl.subscribe, 'customUrl');
-  const referrerUrl = jest.spyOn(mdl.subscribe, 'referrerUrl');
-  const pageView = jest.spyOn(mdl.subscribe, 'pageView');
-  const unsubscribeAddToCart = jest.spyOn(mdl.unsubscribe, 'addToCart');
+  const addToCart = jest.spyOn(mse.subscribe, 'addToCart');
+  const productPageView = jest.spyOn(mse.subscribe, 'productPageView');
+  const pageActivitySummary = jest.spyOn(mse.subscribe, 'dataLayerChange');
+  const customUrl = jest.spyOn(mse.subscribe, 'customUrl');
+  const referrerUrl = jest.spyOn(mse.subscribe, 'referrerUrl');
+  const pageView = jest.spyOn(mse.subscribe, 'pageView');
+  const unsubscribeAddToCart = jest.spyOn(mse.unsubscribe, 'addToCart');
   const unsubscribeProductPageView = jest.spyOn(
-    mdl.unsubscribe,
+    mse.unsubscribe,
     'productPageView',
   );
   const unsubscribePageActivitySummary = jest.spyOn(
-    mdl.unsubscribe,
-    'pageActivitySummary',
+    mse.unsubscribe,
+    'dataLayerChange',
   );
-  const unsubscribeCustomUrl = jest.spyOn(mdl.unsubscribe, 'customUrl');
-  const unsubscribeReferrerUrl = jest.spyOn(mdl.unsubscribe, 'referrerUrl');
-  const unsubscribePageView = jest.spyOn(mdl.unsubscribe, 'pageView');
+  const unsubscribeCustomUrl = jest.spyOn(mse.unsubscribe, 'customUrl');
+  const unsubscribeReferrerUrl = jest.spyOn(mse.unsubscribe, 'referrerUrl');
+  const unsubscribePageView = jest.spyOn(mse.unsubscribe, 'pageView');
   const { rerender } = renderHook(() => useCreateDataLayerEventHandlers());
 
   // subscribers created on initial render
@@ -76,7 +68,7 @@ test('subscribes to and unsubscribes from events', () => {
 
 test('add to cart event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.addToCart();
+  mse.publish.addToCart();
   expect(collectorSpy).toHaveBeenLastCalledWith(
     'trackStructEvent',
     'product',
@@ -84,32 +76,13 @@ test('add to cart event handled correctly', () => {
     null,
     null,
     null,
-    [
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
-      },
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/magento-extension/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/storefront-instance/jsonschema/2-0-0',
-      },
-    ],
+    [],
   );
 });
 
 test('product page view event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.productPageView();
+  mse.publish.productPageView();
   expect(collectorSpy).toHaveBeenLastCalledWith(
     'trackStructEvent',
     'product',
@@ -117,32 +90,13 @@ test('product page view event handled correctly', () => {
     null,
     null,
     null,
-    [
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
-      },
-      {
-        data: undefined,
-        schema: 'iglu:com.adobe.magento.entity/shopper/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/magento-extension/jsonschema/1-0-0',
-      },
-      {
-        data: undefined,
-        schema:
-          'iglu:com.adobe.magento.entity/storefront-instance/jsonschema/2-0-0',
-      },
-    ],
+    [],
   );
 });
 
 test('page activity summary event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.pageActivitySummary();
+  mse.context.setPageOffset(undefined);
   expect(collectorSpy).toHaveBeenLastCalledWith('trackSelfDescribingEvent', {
     data: undefined,
     schema: 'iglu:com.adobe.magento.event/activity-summary/jsonschema/1-0-0',
@@ -151,7 +105,7 @@ test('page activity summary event handled correctly', () => {
 
 test('custom url event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.customUrl();
+  mse.publish.customUrl();
   expect(collectorSpy).toHaveBeenLastCalledWith('trackSelfDescribingEvent', {
     data: undefined,
     schema: 'iglu:com.adobe.magento.event/activity-summary/jsonschema/1-0-0',
@@ -160,27 +114,23 @@ test('custom url event handled correctly', () => {
 
 test('referrer url event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.referrerUrl();
+  mse.publish.referrerUrl();
   expect(collectorSpy).toHaveBeenLastCalledWith('setReferrerUrl', undefined);
 });
 
 test('page view event handled correctly', () => {
   renderHook(() => useCreateDataLayerEventHandlers());
-  mdl.publish.pageView();
+  mse.publish.pageView();
   expect(collectorSpy).toHaveBeenLastCalledWith('trackPageView');
 });
 
 test('prepareProductContext correctly formats context data', () => {
-  const shopperContext = generateShopperContext();
-  const storefrontInstanceContext = generateStorefrontInstanceContext();
-  const magentoExtensionContext = generateMagentoExtensionContext();
   const productContext = generateProductContext();
-  const shoppingCartContext = generateShoppingCart();
 
-  const noCartResult = [
+  const result = [
     {
       data: {
-        categories: ['test'],
+        categories: productContext.categories.map(cat => String(cat.id)),
         name: productContext.name,
         productId: productContext.id,
         sku: productContext.sku,
@@ -188,53 +138,11 @@ test('prepareProductContext correctly formats context data', () => {
       },
       schema: 'iglu:com.adobe.magento.entity/product/jsonschema/2-0-3',
     },
-    {
-      data: shopperContext,
-      schema: SHOPPER_SCHEMA_URL,
-    },
-    {
-      data: magentoExtensionContext,
-      schema: MAGENTO_EXTENSION_SCHEMA_URL,
-    },
-    {
-      data: storefrontInstanceContext,
-      schema: STOREFRONT_INSTANCE_SCHEMA_URL,
-    },
   ];
 
-  mdl.context.setShopper(shopperContext);
-  mdl.context.setStorefrontInstance(storefrontInstanceContext);
-  mdl.context.setMagentoExtension(magentoExtensionContext);
-  mdl.context.setProduct(productContext);
+  mse.context.setProduct(productContext);
 
-  const preparedContexts = prepareProductContexts();
+  const preparedContexts = prepareProductContext();
 
-  expect(preparedContexts).toEqual(noCartResult);
-
-  mdl.context.setShoppingCart(shoppingCartContext);
-
-  const preparedContextsWithCart = prepareProductContexts();
-
-  expect(preparedContextsWithCart).toEqual([
-    ...noCartResult,
-    {
-      data: {
-        cartId: 0,
-        items: [
-          {
-            cartItemId: 1234,
-            mainImageUrl: 'https://test.com/cool.jpg',
-            offerPrice: 1.23,
-            productName: 'my product',
-            productSku: '1234',
-            qty: 100,
-          },
-        ],
-        itemsCount: 100,
-        subtotalExcludingTax: 123,
-        subtotalIncludingTax: 124,
-      },
-      schema: SHOPPING_CART_SCHEMA_URL,
-    },
-  ]);
+  expect(preparedContexts).toEqual(result);
 });

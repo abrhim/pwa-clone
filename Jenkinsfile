@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             label "worker"
-            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws-magento-cli:11-03"
+            image "docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com/node-aws-magento-cli:12-01"
             args  '-v /etc/passwd:/etc/passwd'
             registryUrl "https://docker-data-solution-jenkins-node-aws-dev.dr-uw2.adobeitc.com"
             registryCredentialsId "artifactory-datasoln"

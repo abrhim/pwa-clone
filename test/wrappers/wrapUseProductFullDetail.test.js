@@ -1,17 +1,17 @@
 import { renderHook } from '@testing-library/react-hooks';
 import wrapUseProductFullDetail from '../../lib/collector/wrappers/wrapUseProductFullDetail';
-import mdl from 'magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 import { sampleGraphQLProduct } from '../mocks';
 
 test('both original function and wrapper functionality are run in the hook', () => {
   const functionToWrap = jest.fn();
-  jest.spyOn(mdl.context, 'setProduct');
-  jest.spyOn(mdl.publish, 'productPageView');
-  jest.spyOn(mdl.publish, 'productPageView');
+  jest.spyOn(mse.context, 'setProduct');
+  jest.spyOn(mse.publish, 'productPageView');
+  jest.spyOn(mse.publish, 'productPageView');
   const props = { product: sampleGraphQLProduct };
 
   // assert baseline empty context
-  expect(mdl.context.getProduct()).toBeUndefined();
+  expect(mse.context.getProduct()).toBeUndefined();
 
   const useProductFullDetail = wrapUseProductFullDetail(functionToWrap);
   const { unmount } = renderHook(() => useProductFullDetail(props));
@@ -21,12 +21,12 @@ test('both original function and wrapper functionality are run in the hook', () 
   expect(functionToWrap).toHaveBeenCalledWith(props);
 
   // Handles product page view
-  expect(mdl.context.setProduct).toHaveBeenCalledTimes(1);
-  expect(mdl.publish.productPageView).toHaveBeenCalledTimes(1);
-  expect(mdl.context.getProduct().id).toEqual(sampleGraphQLProduct.id);
+  expect(mse.context.setProduct).toHaveBeenCalledTimes(1);
+  expect(mse.publish.productPageView).toHaveBeenCalledTimes(1);
+  expect(mse.context.getProduct().id).toEqual(sampleGraphQLProduct.id);
 
   // Cleans up product context on page view
   unmount();
-  expect(mdl.context.setProduct).toHaveBeenCalledTimes(2);
-  expect(mdl.context.getProduct()).toEqual({});
+  expect(mse.context.setProduct).toHaveBeenCalledTimes(2);
+  expect(mse.context.getProduct()).toEqual({});
 });

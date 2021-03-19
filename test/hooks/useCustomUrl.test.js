@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useCustomUrl from '../../lib/collector/hooks/useCustomUrl';
-import mdl from 'magento-data-layer-sdk';
+import mse from '@adobe/magento-storefront-events-sdk';
 
 const first = {
   pathname: '/first',
@@ -25,17 +25,17 @@ test('custom url flow control', () => {
   const secondLocation = 'http://test.com/';
   window.location = new URL(firstLocation);
   const customUrlSpy = jest.fn();
-  mdl.subscribe.customUrl(customUrlSpy);
+  mse.subscribe.customUrl(customUrlSpy);
   const { rerender } = renderHook(() => useCustomUrl());
   expect(customUrlSpy).toHaveBeenCalledTimes(1);
-  expect(mdl.context.getCustomUrl().customUrl).toEqual(firstLocation);
+  expect(mse.context.getCustomUrl().customUrl).toEqual(firstLocation);
   // refiring useEffect without changing location doesn't publish event
   rerender();
   expect(customUrlSpy).toHaveBeenCalledTimes(1);
-  expect(mdl.context.getCustomUrl().customUrl).toEqual(firstLocation);
+  expect(mse.context.getCustomUrl().customUrl).toEqual(firstLocation);
   // rerendering with new location fires events and updates context
   window.location = new URL(secondLocation);
   rerender();
   expect(customUrlSpy).toHaveBeenCalledTimes(2);
-  expect(mdl.context.getCustomUrl().customUrl).toEqual(secondLocation);
+  expect(mse.context.getCustomUrl().customUrl).toEqual(secondLocation);
 });
