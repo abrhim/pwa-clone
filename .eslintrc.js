@@ -11,6 +11,8 @@ module.exports = {
     'prettier',
     'plugin:jest/recommended',
   ],
+  parser: '@babel/eslint-parser',
+
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

@@ -1,19 +1,11 @@
+.unitTitle {
+  text-align: center;
+  margin: 1.5em;
+  font-weight: 700;
+  font-size: 2.25rem;
+  font-family: 'Source Serif Pro';
+}
+
 .root a {
   text-decoration: none;
-}
-
-.error {
-  text-align: center;
-  padding: 2rem 0;
-}
-
-.galleryItems {
-  composes: items from '~@magento/venia-ui/lib/components/Gallery/gallery.css';
-  grid-template-columns: repeat(5, 1fr);
-}
-
-@media (max-width: 640px) {
-  .galleryItems {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
