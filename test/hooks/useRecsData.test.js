@@ -8,12 +8,15 @@ jest.mock('@magento/recommendations-js-sdk', () => {
   return jest
     .fn()
     .mockImplementation(() => ({ fetchPreconfigured: mockFetchPreconfigured }));
-  //   return  fetchPreconfigured: jest.fn() };
 });
 
 jest.mock('@adobe/magento-storefront-events-sdk', () => ({
   context: {
     getStorefrontInstance: jest.fn().mockReturnValue({ environmentId: 'id' }),
+  },
+  publish: {
+    recsRequestSent: jest.fn(),
+    recsResponseReceived: jest.fn(),
   },
 }));
 
