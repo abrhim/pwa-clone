@@ -1,3 +1,4 @@
 node_modules/*
 **/*.graphql
 lib/src/sp.js
+**/*.css
